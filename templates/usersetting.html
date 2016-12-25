@@ -1,0 +1,184 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<form method='post' action="/usersetting">
+{% csrf_token %}
+  <div class="input-field">
+    <input name="image" id="image" type="text" class="validate" value={{user.image}}>
+    <label for="image">User Image</label>
+  </div>
+
+  <div class="input-field">
+    <input name="description" id="description" type="text" class="validate" value={{user.description}}>
+    <label for="description">User Description</label>
+  </div>
+
+    <p>How important are the following event types to you?</p>
+    <p>Please use a number from 1 to 5 to show importance.</p>
+    <div class="row">
+    <div class="input-field col s4">
+      <input name='attraction' id="attraction" value={{user.attraction}} type="text" class="validate">
+      <label for="attraction">Attraction</label>
+    </div>
+    <div class="input-field col s4">
+      <input name='trip' id="trip" type="text" class="validate" value={{user.trip}}>
+      <label for='trip'>Trip</label>
+    </div>
+    <div class="input-field col s4">
+      <input name='workshop' id="workshop" type="text" class="validate" value={{user.workshop}}>
+      <label for='workshop'>Workshop</label>
+    </div>
+  </div>
+
+  <div class="row">
+  <div class="input-field col s4">
+      <input name='concert' id="concert" type="text" class="validate" value={{user.concert}}>
+      <label for="concert">Concert</label>
+    </div>
+    <div class="input-field col s4">
+      <input name='conference' id="conference" type="text" class="validate" value={{user.conference}}>
+      <label for='conference'>Conference</label>
+    </div>
+    <div class="input-field col s4">
+      <input name='convention' id="convention" type="text" class="validate" value={{user.convention}}>
+      <label for='convention'>Convention</label>
+    </div>
+  </div>
+
+  <div class="row">
+  <div class="input-field col s4">
+      <input name='gala' id="gala" type="text" class="validate" value={{user.gala}}>
+      <label for="gala">Gala</label>
+    </div>
+    <div class="input-field col s4">
+      <input name='festival' id="festival" type="text" class="validate" value={{user.festival}}>
+      <label for='festival'>Festival</label>
+    </div>
+    <div class="input-field col s4">
+      <input name='game' id="game" type="text" class="validate" value={{user.game}}>
+      <label for='game'>Game</label>
+    </div>
+  </div>
+  
+  <div class="row">
+  <div class="input-field col s4">
+      <input name='networking' id="networking" type="text" class="validate" value={{user.networking}}>
+      <label for="networking">Networking</label>
+    </div>
+    <div class="input-field col s4">
+      <input name='social' id="social" type="text" class="validate" value={{user.social}}>
+      <label for='social'>Social</label>
+    </div>
+    <div class="input-field col s4">
+      <input name='seminar' id="seminar" type="text" class="validate" value={{user.seminar}}>
+      <label for='seminar'>Seminar</label>
+    </div>
+  </div>
+
+  <div class="row">
+  <div class="input-field col s4">
+      <input name='expo' id="expo" type="text" class="validate" value={{user.expo}}>
+      <label for="expo">Expo</label>
+    </div>
+  </div>
+
+    <p>What event topics are you interested in?</p>
+    <p>Please use a number from 1 to 5 to show your interest.</p>
+    <div class="row">
+    <div class="input-field col s4">
+      <input name='business' id="business" type="text" class="validate" value={{user.business}}>
+      <label for="business">Business</label>
+    </div>
+    <div class="input-field col s4">
+      <input name='charity' id="charity" type="text" class="validate" value={{user.trip}}>
+      <label for='charity'>Trip</label>
+    </div>
+    <div class="input-field col s4">
+      <input name='culture' id="culture" type="text" class="validate" value={{user.culture}}>
+      <label for='culture'>Culture</label>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="input-field col s4">
+      <input name='education' id="education" type="text" class="validate" value={{user.education}}>
+      <label for="education">Education</label>
+    </div>
+    <div class="input-field col s4">
+      <input name='fashion' id="fashion" type="text" class="validate" value={{user.fashion}}>
+      <label for='fashion'>Fashion</label>
+    </div>
+    <div class="input-field col s4">
+      <input name='entertainment' id="entertainment" type="text" class="validate" value={{user.entertainment}}>
+      <label for='entertainment'>Entertainment</label>
+    </div>
+  </div>
+
+
+  <div class="row">
+    <div class="input-field col s4">
+      <input name='food' id="food" type="text" class="validate" value={{user.food}}>
+      <label for="food">Food</label>
+    </div>
+    <div class="input-field col s4">
+      <input name='politics' id="politics" type="text" class="validate" value={{user.politics}}>
+      <label for='politics'>Politics</label>
+    </div>
+    <div class="input-field col s4">
+      <input name='health' id="health" type="text" class="validate" value={{user.health}}>
+      <label for='health'>Health</label>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="input-field col s4">
+      <input name='hobbies' id="hobbies" type="text" class="validate" value={{user.hobbies}}>
+      <label for="hobbies">Hobbies</label>
+    </div>
+    <div class="input-field col s4">
+      <input name='lifestyle' id="lifestyle" type="text" class="validate" value={{user.lifestyle}}>
+      <label for='lifestyle'>Lifestyle</label>
+    </div>
+    <div class="input-field col s4">
+      <input name='music' id="music" type="text" class="validate" value={{user.music}}>
+      <label for='music'>Music</label>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="input-field col s4">
+      <input name='performing' id="performing" type="text" class="validate" value={{user.performing}}>
+      <label for="performing">Performing</label>
+    </div>
+    <div class="input-field col s4">
+      <input name='religion' id="religion" type="text" class="validate" value={{user.religion}}>
+      <label for='religion'>Religion</label>
+    </div>
+    <div class="input-field col s4">
+      <input name='technology' id="technology" type="text" class="validate" value={{user.technology}}>
+      <label for='technology'>Technology</label>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="input-field col s4">
+      <input name='holiday' id="holiday" type="text" class="validate" value={{user.holiday}}>
+      <label for="holiday">Holiday</label>
+    </div>
+    <div class="input-field col s4">
+      <input name='sports' id="sports" type="text" class="validate" value={{user.sports}}>
+      <label for='sports'>Sports</label>
+    </div>
+    <div class="input-field col s4">
+      <input name='travel' id="travel" type="text" class="validate" value={{user.travel}}>
+      <label for='travel'>Travel</label>
+    </div>
+  </div>
+
+    <button class="btn waves-effect waves-light red" type="submit" name="action">Submit
+        <i class="material-icons right"></i>
+    </button>
+  </form>
+        
+{% endblock %}

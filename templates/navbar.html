@@ -1,0 +1,38 @@
+{% load staticfiles %}
+
+<nav class="red" role="navigation">
+    <div class="nav-wrapper container">
+      <a id="logo-container" href="{% url 'HomePage' %}" class="brand-logo">WorldNest</a>
+      <ul class="right hide-on-med-and-down">
+        <li><a href="{% url 'MyBoard' %}">My Board</a></li>
+        <li><a href="{% url 'EventList' %}">Browse Events</a></li>
+        <li><a href="{% url 'EventForm' %}">Launch Events</a></li>
+        <li><a href="{% url 'EventType' %}">Types</a></li>
+        <li><a href="{% url 'EventTopic' %}">Topics</a></li>
+        <li><a href="{% url 'UserProfile' %}">My Profile</a></li>
+        <li><a href="{% url 'UserSetting' %}">Setting</a></li>
+        {% if request.user.is_authenticated %}
+            <li><a href="{% url 'auth_logout' %}">Logout</a></li>
+        {% else %}
+            <li><a href="{% url 'auth_login' %}">Login</a></li>
+        {% endif %}
+      </ul>
+
+      <ul id="nav-mobile" class="side-nav">
+        <li><a href="{% url 'MyBoard' %}">My Board</a></li>
+        <li><a href="{% url 'EventList' %}">Browse Events</a></li>
+        <li><a href="{% url 'EventForm' %}">Launch Events</a></li>
+        <li><a href="{% url 'EventType' %}">Types</a></li>
+        <li><a href="{% url 'EventTopic' %}">Topics</a></li>
+        <li><a href="{% url 'UserProfile' %}">My Profile</a></li>
+        <li><a href="{% url 'UserSetting' %}">Setting</a></li>
+        {% if request.user.is_authenticated %}
+            <li><a href="{% url 'auth_logout' %}">Logout</a></li>
+        {% else %}
+            <li><a href="{% url 'auth_login' %}">Login</a></li>
+        {% endif %}
+      </ul>
+      <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+    </div>
+  </nav>
+

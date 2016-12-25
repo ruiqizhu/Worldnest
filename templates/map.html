@@ -1,0 +1,104 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>WorldMap</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link href="{% static 'css/materialize.css' %}" type="text/css" rel="stylesheet" media="screen,projection"/>
+        <link href="{% static 'css/style.css' %}" type="text/css" rel="stylesheet" media="screen,projection"/>
+        <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script src="{% static 'js/materialize.js' %}"></script>
+        <script src="{% static 'js/init.js' %}"></script>    
+    <style>
+      html, body {
+        height: 95%;
+        margin: 0;
+        padding: 0;
+      }
+      #map {
+        height: 100%;
+      }
+      a{
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+  <nav class="red" role="navigation">
+    <div class="nav-wrapper container">
+      <a id="logo-container" href="{% url 'HomePage' %}" class="brand-logo">WorldNest</a>
+      <ul class="right hide-on-med-and-down">
+        <li><a href="{% url 'MyBoard' %}">My Board</a></li>
+        <li><a href="{% url 'EventList' %}">Browse Events</a></li>
+        <li><a href="{% url 'EventForm' %}">Launch Events</a></li>
+        <li><a href="{% url 'EventType' %}">Types</a></li>
+        <li><a href="{% url 'EventTopic' %}">Topics</a></li>
+        <li><a href="{% url 'UserProfile' %}">My Profile</a></li>
+        <li><a href="{% url 'UserSetting' %}">Setting</a></li>
+        {% if request.user.is_authenticated %}
+            <li><a href="{% url 'auth_logout' %}">Logout</a></li>
+        {% else %}
+            <li><a href="{% url 'auth_login' %}">Login</a></li>
+        {% endif %}
+      </ul>
+
+      <ul id="nav-mobile" class="side-nav">
+        <li><a href="{% url 'MyBoard' %}">My Board</a></li>
+        <li><a href="{% url 'EventList' %}">Browse Events</a></li>
+        <li><a href="{% url 'EventForm' %}">Launch Events</a></li>
+        <li><a href="{% url 'EventType' %}">Types</a></li>
+        <li><a href="{% url 'EventTopic' %}">Topics</a></li>
+        <li><a href="{% url 'UserProfile' %}">My Profile</a></li>
+        <li><a href="{% url 'UserSetting' %}">Setting</a></li>
+        {% if request.user.is_authenticated %}
+            <li><a href="{% url 'auth_logout' %}">Logout</a></li>
+        {% else %}
+            <li><a href="{% url 'auth_login' %}">Login</a></li>
+        {% endif %}
+      </ul>
+      <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+    </div>
+  </nav>
+    <div id="map"></div>
+    <script>
+
+// Google Map API Javascript imitates the one from
+// https://developers.google.com/maps/documentation/javascript/examples/marker-simple
+function initMap() {
+  var cmu = {lat: 40.443781, lng: -79.942751};
+  var map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 16,
+    center: cmu
+  });
+
+  {% for event in allEvents %}
+  
+  var marker = new google.maps.Marker({
+    position: {lat: {{event.lat}}, lng: {{event.lng}}},
+    map: map,
+    title: 'Uluru (Ayers Rock)'
+  });
+  var contentString = "{{event.title}}:{{event.description}} <a href='../{{event.id}}'>Event Link</a>"
+  var infowindow = new google.maps.InfoWindow({
+    content: contentString
+  });
+  google.maps.event.addListener(marker,'click', (function(marker,contentString,infowindow){ 
+    return function() {
+        infowindow.setContent(contentString);
+        infowindow.open(map,marker);
+    };
+  })(marker,contentString,infowindow));  
+  // marker.addListener('click', function() {
+  //   infowindow.open(map, marker);
+  // });
+  {% endfor %}
+}
+    </script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDS1WwBeWM48qkIdsWC3o3_ryYehsrl24Y&signed_in=true&callback=initMap"></script>
+
+  </body>
+</html>
+
+

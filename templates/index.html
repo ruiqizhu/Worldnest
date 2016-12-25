@@ -1,0 +1,190 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+  <title>WorldNest - Discover, Explore, Inspire</title>
+  <!-- Materialize as the web front end framework -->
+  <!-- CSS  -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="{% static 'css/materialize.css' %}" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="{% static 'css/style.css' %}" type="text/css" rel="stylesheet" media="screen,projection"/>
+</head>
+<body>
+  <nav class="red" role="navigation">
+    <div class="nav-wrapper container">
+      <a id="logo-container" href="{% url 'HomePage' %}" class="brand-logo">WorldNest</a>
+      <ul class="right hide-on-med-and-down">
+        <li><a href="{% url 'MyBoard' %}">My Board</a></li>
+        <li><a href="{% url 'EventList' %}">Browse Events</a></li>
+        <li><a href="{% url 'EventForm' %}">Launch Events</a></li>
+        <li><a href="{% url 'EventType' %}">Types</a></li>
+        <li><a href="{% url 'EventTopic' %}">Topics</a></li>
+        <li><a href="{% url 'UserProfile' %}">My Profile</a></li>
+        <li><a href="{% url 'UserSetting' %}">Setting</a></li>
+        {% if request.user.is_authenticated %}
+            <li><a href="{% url 'auth_logout' %}">Logout</a></li>
+        {% else %}
+            <li><a href="{% url 'auth_login' %}">Login</a></li>
+        {% endif %}
+      </ul>
+
+      <ul id="nav-mobile" class="side-nav">
+        <li><a href="{% url 'MyBoard' %}">My Board</a></li>
+        <li><a href="{% url 'EventList' %}">Browse Events</a></li>
+        <li><a href="{% url 'EventForm' %}">Launch Events</a></li>
+        <li><a href="{% url 'EventType' %}">Types</a></li>
+        <li><a href="{% url 'EventTopic' %}">Topics</a></li>
+        <li><a href="{% url 'UserProfile' %}">My Profile</a></li>
+        <li><a href="{% url 'UserSetting' %}">Setting</a></li>
+        {% if request.user.is_authenticated %}
+            <li><a href="{% url 'auth_logout' %}">Logout</a></li>
+        {% else %}
+            <li><a href="{% url 'auth_login' %}">Login</a></li>
+        {% endif %}
+      </ul>
+      <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+    </div>
+  </nav>
+
+  <div id="index-banner" class="parallax-container">
+    <div class="section no-pad-bot">
+      <div class="container">
+        <br><br>
+        <h1 class="header center white-text text-lighten-2">Let Your Dreams Take Flight</h1>
+        <div class="row center">
+          <h5 class="header col s12 light">Discover the world filled with opportunites</h5>
+        </div>
+        <div class="row center">
+          <a href="{% url 'registration_register' %}" id="download-button" class="btn-large waves-effect waves-light red lighten-1">Join The Community</a>
+        </div>
+        <br><br>
+
+      </div>
+    </div>
+    <div class="parallax"><img src="{% static 'image1.jpg' %}" alt="Unsplashed background img 1"></div>
+  </div>
+
+
+  <div class="container">
+    <div class="section">
+
+      <!--   Icon Section   -->
+      <div class="row">
+        <div class="col s12 m4">
+          <div class="icon-block">
+            <h2 class="center brown-text"><i class="material-icons">flash_on</i></h2>
+            <h5 class="center">Explore Amazing Events</h5>
+
+            <p class="light">Check out the amazing things taking place at CMU. Whether it's 
+            an inspiring lecture, a huge job fair, an incredible concert, you will find
+            your passion. Discover events that can not only bring you professional growth,
+            but also have fun in the process.</p>
+          </div>
+        </div>
+
+        <div class="col s12 m4">
+          <div class="icon-block">
+            <h2 class="center brown-text"><i class="material-icons">group</i></h2>
+            <h5 class="center">Make New Friends</h5>
+
+            <p class="light">Meet talented and diverse people in the CMU campus. Start by 
+            sharing wonderful experience together and building bridges with others. Friends
+            are the source of happiness and together, you can achieve something great. </p>
+          </div>
+        </div>
+
+        <div class="col s12 m4">
+          <div class="icon-block">
+            <h2 class="center brown-text"><i class="material-icons">settings</i></h2>
+            <h5 class="center">Launch Your Dream</h5>
+
+            <p class="light">Promote your events in the network and find others who
+            share the same dreams with you. WorldNest is a channel where your dreams and visions
+            can be spread in the campus or even the world. Start right now and let your
+            dreams take flight.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <div class="parallax-container valign-wrapper">
+    <div class="section no-pad-bot">
+      <div class="container">
+        <div class="row center">
+          <h5 class="header col s12 light">Where Everything Is Possible</h5>
+        </div>
+      </div>
+    </div>
+    <div class="parallax"><img src="{% static 'image2.jpg' %}" alt="Unsplashed background img 2"></div>
+  </div>
+
+  <div class="container">
+    <div class="section">
+
+      <div class="row">
+        <div class="col s12 center">
+          <h3><i class="mdi-content-send brown-text"></i></h3>
+          <h4>Contact Us</h4>
+          <p class="left-align light">My name is Rich and WorldNest is not only my 
+          15112 project, but more importantly, a website I created where people
+          can find amazing experience in CMU and build connections with another. WorldNest
+          aims to bring people together and help them discover opportunities to realize
+          their dreams.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <div class="parallax-container valign-wrapper">
+    <div class="section no-pad-bot">
+      <div class="container">
+        <div class="row center">
+          <h5 class="header col s12 light">Feel The Power Of A Community</h5>
+        </div>
+      </div>
+    </div>
+    <div class="parallax"><img src="{% static 'image3.jpg' %}" alt="Unsplashed background img 3"></div>
+  </div>
+
+  <footer class="page-footer red">
+    <div class="container">
+      <div class="row">
+        <div class="col l6 s12">
+          <h5 class="white-text">Company Bio</h5>
+          <p class="grey-text text-lighten-4">Check us out on social media and at Carnegie Mellon University.</p>
+
+
+        </div>
+        <div class="col l3 s12">
+          <h5 class="white-text">Settings</h5>
+          
+        </div>
+        <div class="col l3 s12">
+          <h5 class="white-text">Connect</h5>
+          
+        </div>
+      </div>
+    </div>
+    <div class="footer-copyright">
+      <div class="container">
+      Made by <a class="brown-text text-lighten-3" href="http://materializecss.com">Materialize</a>
+      </div>
+    </div>
+  </footer>
+
+
+  <!--  Scripts-->
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="{% static 'js/materialize.js' %}"></script>
+  <script src="{% static 'js/init.js' %}"></script>
+
+  </body>
+</html>

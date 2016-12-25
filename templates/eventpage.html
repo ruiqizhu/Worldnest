@@ -1,0 +1,122 @@
+{% if error_message %}
+    <p><strong>{{error_message}}</strong></p>
+{% endif %}
+
+{% load staticfiles %}
+<!DOCTYPE html>
+    <head>
+        <!-- Materialize as the web front end framework -->
+        <!-- Compiled and minified CSS -->
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+        <title>WorldNest</title>
+
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link href="{% static 'css/materialize.css' %}" type="text/css" rel="stylesheet" media="screen,projection"/>
+        <link href="{% static 'css/style.css' %}" type="text/css" rel="stylesheet" media="screen,projection"/>
+        <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script src="{% static 'js/materialize.js' %}"></script>
+        <script src="{% static 'js/init.js' %}"></script>
+        <script src="{% static 'js/scripts.js' %}"></script>          
+    </head>
+    
+    <body>
+    <nav class="red" role="navigation">
+    <div class="nav-wrapper container">
+      <a id="logo-container" href="{% url 'HomePage' %}" class="brand-logo">WorldNest</a>
+      <ul class="right hide-on-med-and-down">
+        <li><a href="{% url 'MyBoard' %}">My Board</a></li>
+        <li><a href="{% url 'EventList' %}">Browse Events</a></li>
+        <li><a href="{% url 'EventForm' %}">Launch Events</a></li>
+        <li><a href="{% url 'EventType' %}">Types</a></li>
+        <li><a href="{% url 'EventTopic' %}">Topics</a></li>
+        <li><a href="{% url 'UserProfile' %}">My Profile</a></li>
+        <li><a href="{% url 'UserSetting' %}">Setting</a></li>
+        {% if request.user.is_authenticated %}
+            <li><a href="{% url 'auth_logout' %}">Logout</a></li>
+        {% else %}
+            <li><a href="{% url 'auth_login' %}">Login</a></li>
+        {% endif %}
+      </ul>
+
+      <ul id="nav-mobile" class="side-nav">
+        <li><a href="{% url 'MyBoard' %}">My Board</a></li>
+        <li><a href="{% url 'EventList' %}">Browse Events</a></li>
+        <li><a href="{% url 'EventForm' %}">Launch Events</a></li>
+        <li><a href="{% url 'EventType' %}">Types</a></li>
+        <li><a href="{% url 'EventTopic' %}">Topics</a></li>
+        <li><a href="{% url 'UserProfile' %}">My Profile</a></li>
+        <li><a href="{% url 'UserSetting' %}">Setting</a></li>
+        {% if request.user.is_authenticated %}
+            <li><a href="{% url 'auth_logout' %}">Logout</a></li>
+        {% else %}
+            <li><a href="{% url 'auth_login' %}">Login</a></li>
+        {% endif %}
+      </ul>
+      <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+    </div>
+  </nav>
+        <div class='row' height=200>
+        </div>
+        <div class="row">
+            <img class="materialboxed col s12 m6 " width=440 height=380 src="{{event.image}}">
+            <div class="col s12 m6">
+              <div class="card blue-grey darken-1" style='height: 380px'>
+                <div class="card-content white-text" style='height: 300px'>
+                  <span class="card-title">{{event.title}}</span>
+                  <p>Location: {{event.address}}, {{event.city}}, {{event.state}}</p>
+                  <p>Organizer: {{event.organizer}}</p>
+                  <p>Start Time: {{event.start_time}}</p>
+                  <p>End Time: {{event.end_time}}</p>
+                  <p>Event Type: {{event.event_type}}</p>
+                  <p>Event Topic: {{event.event_topic}}</p>
+
+                  <form method="post" action="/{{event.id}}">
+                  {% csrf_token %}
+                    {% if event.like == False %}
+                    <input name="event_number" value="{{event.id}}" type="hidden">
+                    <button class="btn waves-effect waves-light red" type="submit" name="action">Like
+                              <i class="material-icons right"></i>
+                          </button>
+                    {% else %}
+                    <input name="event_number" value="{{event.id}}" type="hidden">
+                    <button class="btn waves-effect waves-light red" type="submit" name="action">Liked
+                              <i class="material-icons right"></i>
+                          </button>
+                    {% endif %}
+
+                  </form>
+                </div>
+                <div class="card-action">
+                  <a href="{{event.ticket}}">Buy Tickets</a>
+                  <a href="{{event.event_page}}">Event Page</a>
+                </div>
+              </div>
+            </div>
+        </div>
+
+    <div class='row'>
+        <div class='col s12 m6'>
+            <!-- Google Map API -->
+            <iframe width="600" height="450" frameborder="0" style="border:0"
+               src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDBY6iWRdwPpNU42g4cgXFvpeO-sW8-ocU
+               &q={{event.address}}" allowfullscreen>
+            </iframe> 
+        </div>
+        <div class='col s12 m6'>
+            <ul class="collapsible" data-collapsible="accordion">
+                <li>
+                    <div class="collapsible-header"><i class="material-icons">filter_drama</i>Description</div>
+                    <div class="collapsible-body"><p>{{event.description}}</p></div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <h4 style='text-align:center'>Other Events You Might Like</h4>
+    <div class="carousel">
+    {% for elem in related %}
+    <a class="carousel-item" href="../{{elem.id}}"><img src="{{elem.image}}"></a>
+    {% endfor %}
+    </div>  
+    </body>
+</html>
